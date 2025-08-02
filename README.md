@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Common Area Maintenance System
 
-## Getting Started
+A simple complaint management system with separate user and admin roles, built with Next.js and MongoDB.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **User Role**: Submit complaints and view their status
+- **Admin Role**: View all complaints and update their status
+- **Status Tracking**: Pending → In Progress → Completed
+- **MongoDB Storage**: All data stored securely in MongoDB
+- **Simple UI**: Clean and easy-to-use interface
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Set up environment variables:**
+   Create a `.env.local` file in the root directory:
+   ```
+   MONGODB_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret_key
+   ```
 
-## Learn More
+3. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. **Open your browser:**
+   Navigate to `http://localhost:3000`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Usage
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### For Users:
+1. Sign up as a "User" or login with existing credentials
+2. Submit complaints with title, category, priority, and description
+3. View your complaints and their current status
 
-## Deploy on Vercel
+### For Admins:
+1. Sign up as an "Admin" or login with admin credentials
+2. View all complaints from all users
+3. Update complaint status (Pending → In Progress → Completed)
+4. See who submitted each complaint
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## API Endpoints
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `POST /api/auth/signup` - User registration
+- `POST /api/auth/login` - User login
+- `GET /api/complaints` - Get complaints (role-based)
+- `POST /api/complaints` - Submit new complaint
+- `PUT /api/complaints/[id]` - Update complaint status (admin only)
+
+## Database Schema
+
+### User Model:
+- username, email, password, role (user/admin)
+
+### Complaint Model:
+- title, description, category, priority, status
+- createdBy (user reference), createdAt, updatedAt
+
+## Pages
+
+- `/` - Home page
+- `/login` - Login page
+- `/signup` - Registration page
+- `/complaints` - User complaints page
+- `/admin` - Admin dashboard
