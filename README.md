@@ -69,3 +69,6 @@ A simple complaint management system with separate user and admin roles, built w
 - `/signup` - Registration page
 - `/complaints` - User complaints page
 - `/admin` - Admin dashboard
+
+
+DEPLOYMENT LINK - https://common-area-maintainence.vercel.app/
